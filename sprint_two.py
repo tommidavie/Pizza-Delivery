@@ -1,27 +1,24 @@
-def get_integer(m):
-    my_integer = int(input(m))
-    return my_integer
-
+from validations import validate_index
+from validations import validate_integer
 
 def get_string(m):
-    my_string = input(m)
+    my_string = input(m).upper()
     return my_string
-
 
 def print_pizza_menu(p):
     print("PIZZA MENU:")
     print(100 * "-")
     for i in range(0, len(p)):
-        output ="{:1} : {:10}  {:10}".format(i+1, p[i][0], p[i][1])
+        output = "{:1} : {:10}  {:10}".format(i+1, p[i][0], p[i][1])
         print(output)
 
 
 def customer_order(p, r):
     print_pizza_menu(p)
     print(100*"-")
-    index_number = get_integer("Please chose the index number of the pizza you would like to order: ")
+    index_number = validate_index("Please chose the index number of the pizza you would like to order: ", 0, len(p))
     i_no = index_number - 1
-    amount = get_integer("How many {} pizzas would you like to order: ".format(p[i_no][0]))
+    amount = validate_integer("How many {} pizzas would you like to order: ".format(p[i_no][0]), 0, 5)
     update = "{} {} pizzas have now been added to your order".format(amount, p[i_no][0])
     print(update)
     updated_list = [amount,  p[i_no][0]]
@@ -87,4 +84,6 @@ def main():
             print(100*"-")
         else:
             print("This is not a valid option. Please try again :)")
+
+
 main()

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<style>
+        
+body
+{
+	margin: 0;
+	padding: 0;
+	color: #black;
+	background-color: #skyblue;
+	font: 1em/1.2 "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6
+{
+	margin: 0 0 .5em;
+	font-weight: 500;
+	line-height: 1.1;
+    text-align: center; 
+}
+    
+.img-responsive { 
+    display: block;
+    margin: auto;
+    max-width: 100%; }
+        
+    .header {
+	color: deepskyblue;
+	background: white;
+	padding: 1em 1.25em; 
+    }
+        
+    .nav-bar {
+	background: skyblue;
+    color: white;
+    text-align: center;
+    }
+        
+    h1 { font-size: 2.25em; text-align: center; background-color: aliceblue} /* 36px */
+    h2 { font-size: 1.75em; text-align: center;} /* 28px */
+    h3 { font-size: 1.375em; text-align: center;} /* 22px */
+    h4 { font-size: 1.125em; } /* 18px */
+    h5 { font-size: 1em; } /* 16px */
+    h6 { font-size: .875em; } /* 14px */  
+        
+    p {
+	margin: 1em 1em 1.5em;
+	line-height: 1.5; 
+    text-align: center; } 
+        
+    .footer {
+	color: skyblue;
+	background: aliceblue;
+	padding: 1em 1.25em;
+    font-size: 1.5em;
+    text-align: center;}
+        
+
+</style>    
+    
+    
+	<head>
+		<meta charset="utf-8">
+		<title>Tommi's Planning Website</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="Description" lang="en" content="ADD SITE DESCRIPTION">
+		<meta name="author" content="ADD AUTHOR INFORMATION">
+		<meta name="robots" content="index, follow">
+
+		<!-- icons -->
+		<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+		<link rel="shortcut icon" href="favicon.ico">
+<link rel="stylesheet" href="assets/highlight/styles/tomorrow.css">
+<script src="assets/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+        
+
+		<!-- Override CSS file - add your own CSS rules -->
+		<link rel="stylesheet" href="assets/css/styles.css">
+
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<h1 class="header-heading">Tommi's Planning Website</h1>
+			</div>
+			<div class="nav-bar">
+				<ul class="nav">
+					<li><a href="#Sprint_One">Sprint One</a></li>
+					<li><a href="#Sprint_Two">Sprint Two</a></li>
+					<li><a href="#Sprint_Three">Sprint Three</a></li>
+                    <li><a href="#Sprint_Four">Sprint Four</a></li>
+                    <li><a href="#Relevant_Implications">Relevant Implications</a></li>
+				</ul>
+			</div>
+			<div class="content">
+
+
+    <!-- Heading levels -->
+    <h1 id="Sprint_One">Sprint One</h1>
+    <br> 
+    <h2>Sprint One Planning Board:</h2>
+    <br>
+    <img class="img-responsive" src="assets/img/sprint_one_planning_board.png" width="800" height="370" alt="Sprint One Planning Board">
+    <br>
+    <h2>Sprint One Code Ouput:</h2>
+    <br>
+    <img class="img-responsive" src="assets/img/sprint_one_code_output.png" width="550" height="330" alt="Sprint One Code Output">
+    <br>
+    <h2>Sprint One Review:</h2>
+    <br>
+    <h4>The first sprint I have completed for my program prints a very basic pizza menu for the customer when requested, along with a list of their prices. The program runs in a loop, printing the menu over and over again when the user enters 'R', quitting the program if the user enters 'Q'. If the user selects to quit, the loop terminates and a confirmation message is printed informing the user that the program has ended.</h4>
+    <br>
+                
+    <h1 id="Sprint_Two">Sprint Two</h1> 
+                
+    <h2>Aim:</h2>
+    <h3>To create a function which allows the customer to order a pizza from the pizza menu and chose the quantity they would like, that works in conjunction with another function which enables the operator to review their current order status.</h3>
+    <br>
+    <h2>Stand-Up 30/7/20 :</h2>
+    <br>
+    <img class="img-responsive" src="assets/img/stand_up_30_jul.png" alt="Stand Up Jul 30">
+    <br>
+    <h4>Planning for sprint two (and for my entire program) includes a short meeting at the beginning of the working day which questions what we have done, what we intend to do and what is blocking us from doing so. On the 30th of July I had completed and tested the first sprint of my program, and began my planning for the second sprint of my program. I decided, as seen above, that I would create code which asks the user what they would like to order - and add it to their personal customer list.</h4>
+    <br>
+    <h2>Sprint Two Planning Board:</h2>
+    <br>
+    <img class="img-responsive" src="assets/img/sprint_two_planning_board.png" alt="Sprint Two Planning Board">
+    <br>
+    <h2>Sprint Two Planning and Testing Evidence:</h2>
+    <img class="img-responsive" src="assets/img/sprint_two_evidence.jpg" alt="Sprint Two Planning Evidence">
+    <br>
+    <h2>An Error I Encountered:</h2>
+    <br>
+    <img class="img-responsive" src="assets/img/sprint_two_index_error.png" width="650" height="350" alt="Sprint Two Index Error">
+    <br>
+    <h2>Sprint Two Review:</h2>
+    <br>
+    <h3>What has been successful?</h3>
+    <ul>
+    <li>The user is able to enter the pizza flavour they would like to order and the quantity of which they would like. They can do this more than once by returning to the main menu and clicking the order option once more. They can also review their current order status (the type and quantity of pizzas they have ordered) and will be sent back to the main menu once more, in case they want to add to their order or quit the program.</li>
+    </ul>
+    <h3>What are the problems?</h3>
+    <ul>
+    <li>At this stage my program has no validation (as can be seen in the multiple screenshots of tests I have recorded above). This means that the user can enter invalid indexes and 0 values. The customer can also enter the same pizza twice and it is not recognised as the same value which has previously been ordered. Another issue is that the prices of the pizzas are not calculated and shown.</li>
+    </ul>
+    <br>
+                
+    <h1 id="Sprint_Three">Sprint Three</h1> 
+    
+    <h2>Aim:</h2>
+    <h3>To validate the current version of my program (seen in Sprint Two) ensuring all of the unexpected user inputs are recognised by the program - notifying the customer of their mistake and preventing them from contiuing unless their issue is resolved.</h3>
+    <br>
+    <h2>Sprint Three Planning Board:</h2>
+    <br>
+    <img class="img-responsive" src="assets/img/sprint_three_planning_board.png" alt="Sprint Three Planning Board">
+    <br>
+    <h2>Sprint Three Planning and Testing Evidence:</h2>
+    <br>
+    <img class="img-responsive" src="assets/img/sprint_three_evidence.jpg" alt="Sprint Three Planning Evidence">
+    <br>
+    <br>
+    <h2>Sprint Three Review:</h2>
+    <br>
+    <h3>What has been successful?</h3>
+    <ul>
+    <li>I was able to successfully incorporate all of the validations I created in my validations file into my main file, preventing the user from continuing if they enter an unexpected input. Instances where this would occur (seen in screenshots above) include when the user is selecting how many pizzas they would like to order. If the customer enters a letter, or a number below 1 or above 5 (the pizza limit suggested in our breif) they are met with an error message which asks them to enter an input which meets these boundaries.</li>
+    </ul>
+    <h3>What are the problems?</h3>
+    <ul>
+    <li>At this stage my program has no validation (as can be seen in the multiple screenshots of tests I have recorded above). This means that the user can enter invalid indexes and 0 values. The customer can also enter the same pizza twice and it is not recognised as the same value which has previously been ordered. Another issue is that the prices of the pizzas are not calculated and shown.</li>
+    </ul>
+    <br>
+    
+    <h1 id="Sprint_Four">Sprint Four</h1>
+    <br> 
+    <h2>Sprint Four Planning Board:</h2>
+    <h3>To calculate and print the total cost of the customer's pizza order, printing how much each separate pizza flavour will be individually, and the overall cost as the customer reviews and confirms their order.</h3>
+    <br>
+    <h2>Sprint Four Planning Board:</h2>
+    <br>
+    <img class="img-responsive" src="assets/img/sprint_four_planning_board.png" alt="Sprint Four Planning Board">
+    <br>
+    <h2>Sprint Four Planning Evidence:</h2>
+    <br>
+    <img class="img-responsive" src="assets/img/sprint_four_evidence_1.jpg" alt="Sprint Four Evidence 1">
+    <br>
+    <h2>Sprint Four Reflection:</h2>
+    <br>
+    <p>During the fourth sprint of my project I created ‘cost’ and ‘total_cost’ values which were coded into the customer order function. Initially, I had coded ‘cost = amount * 18.50’. I found this to be a problem as the gourmet pizzas I was intending to add to my menu were different prices, ($21.50) so the cost printed would be inaccurate. This was a problem as it would be very difficult to update the ‘total_cost’ accurately. 
+   </p>
+    <p>
+    The prices of the pizzas in the 2 dimensional pizza list were strings. By changing this to floats (numbers) I could treat them as numbers - multiplying them by the quantity of pizzas the customer has ordered. As a result of changing these string values, this made it much easier to calculate the ‘total_cost’ of the pizza order. 
+    </p>
+
+	            
+
+			
+			</div>
+			<div class="footer">
+				&copy; Copyright 2015
+			</div>
+		</div>
+	</body>
+</html>
