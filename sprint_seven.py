@@ -1,14 +1,9 @@
-
 """This is a program which enables customers to order pizzas"""
 
 # This imports validations functions I have created in a separate file
 from validations import validate_index
 from validations import validate_integer
-
-
-def get_string(m):
-    my_string = input(m).upper()
-    return my_string
+from validations import validate_string
 
 
 def print_pizza_menu(p):
@@ -67,7 +62,7 @@ def customer_order(p, r):
     # Cost of one pizza
     pizza_cost = p[i_no][1]
     # The quantity, flavour and cost of a singular pizza
-    temp_pizzas = [amount,  p[i_no][0], pizza_cost]
+    temp_pizzas = [amount, p[i_no][0], pizza_cost]
     # Inserting pizza information into the customer list
     r.append(temp_pizzas)
 
@@ -120,16 +115,19 @@ def sub_menu_function(s, c):
         for i in range(0, len(s)):
             output = "{:<2} : {:<2}".format(s[i][0], s[i][1])
             print(output)
-        option = get_string("Which option would you like to select: ")
+        option = validate_string("Which option would you like to select: ", 1, 1)
         if option == "C":
             index = validate_index("Which index number would you like to edit: ", 0, len(c))
             new_quantity = validate_integer("Please enter the new total quantity of {} pizzas: ".format(c[index-1][1]), 0, 5)
             c[index-1][0] = new_quantity
+            print("Your order has been updated, you now have {} {} pizzas.".format(c[index-1][0], c[index-1][1]))
+            print(100*"-")
         elif option == "R":
             message1 = "Which index number would you like to edit: "
             index = validate_integer(message1, 0, len(c))
-            message2 = "Are you sure you would like to remove this flavour from the list enter 'y' for yes and 'n' for no: "
-            choice = get_string(message2)
+            message2 = "Are you sure you would like to remove this flavour from the list? \n" \
+                       "Enter 'y' for yes and 'n' for no: "
+            choice = validate_integer(message2, 1, 1)
             if choice in ["Y", "y"]:
                 c.pop(index-1)
                 print("Your order has been updated :)")
@@ -138,8 +136,7 @@ def sub_menu_function(s, c):
                 print("Your order has not been updated, you have been directed back to the main menu :)")
                 run = False
             else:
-                print("Please enter either 'y' for 'yes' or 'n' for 'no'")
-                print(100*"-")
+                print("Please enter either 'y' for 'yes' or 'n' for 'no'. Your answer cannot be an integer.")
                 continue
         elif option == "M":
             run = False
@@ -150,18 +147,68 @@ def sub_menu_function(s, c):
 def cancel_order(c):
     run = True
     while run is True:
-        answer = get_string("Are you sure you would like to cancel your order? Press 'y' for 'yes' and 'n' for 'no': ")
+        answer = validate_string("Are you sure you would like to cancel your order? \n"
+                                 "Press 'y' for 'yes' and 'n' for 'no': ", 1, 1)
         if answer in ["Y", "y"]:
             c.clear()
             print("Your order has been canceled :)")
-            return None
+            return True
         elif answer in ["N", "n"]:
             print("Your order has not been canceled, you have been directed back to the main menu :)")
-            run = False
+            return False
         else:
             print("Please enter either 'y' for 'yes' or 'n' for 'no'")
             print(100 * "-")
             continue
+
+
+def customer_information(i):
+    print(100*"-")
+    print("WELCOME TO PIZZAROO, THIS IS THE SHOP FOR YOU!")
+    print(100*"-")
+    run = True
+    while run is True:
+        service = validate_string("Would you like to pick up your order or receive it through delivery? \n"
+                                  "Press 'P' for pick up order and 'D' for delivery: ", 1, 1)
+        if service in ["P", "p"]:
+            name = validate_string("Please enter your full name: ", 2, 50)
+            phone = validate_string("Please enter your phone number: ", 5, 20)
+            card = validate_string("Please enter your card number: ", 5, 20)
+            print(100*"-")
+            temp_information_1 = [("Full Name", name), ("Phone Number", phone), ("Card Number", card)]
+            i.extend(temp_information_1)
+            run = False
+        elif service in ["D", "d"]:
+            name = validate_string("Please enter your full name: ", 2, 50)
+            address_line_1 = validate_string("Please enter the first line of your Address, i.e: '13 Hataitai Road' : ",
+                                             3, 70)
+            address_line_2 = validate_string("Please enter the second line of your Address, (OPTIONAL) \n"
+                                             "e.g: 'Apt 2A, Level 3': ", 0, 70)
+            phone = validate_string("Please enter your phone number: ", 1, 1)
+            card = validate_string("Please enter your card number: ", 1, 1)
+            delivery_service = validate_string("Which deliver service would you like to use? \n"
+                                               "Press 'D' for Deliver Easy or 'U' for Uber Eats: ", 1, 1)
+            if delivery_service in ["U", "u"]:
+                delivery_service = "UBER EATS"
+            elif delivery_service in ["D", "d"]:
+                delivery_service = "DELIVER EASY"
+            else:
+                print("Please enter either 'U' for Uber Eats or 'D' for Deliver Easy.")
+                continue
+            print(100*"-")
+            temp_information_2 = [("Full Name", name), ("Address Line One", address_line_1), ("Address Line Two", address_line_2),
+                                  ("Phone Number", phone), ("Card Number", card), ("Delivery Service", delivery_service)]
+            i.extend(temp_information_2)
+            run = False
+
+
+def print_customer_information(c):
+    print("MY INFORMATION")
+    print(100*"-")
+    for i in range(0, len(c)):
+        output = "{:<20} : {:<20}".format(c[i][0], c[i][1])
+        print(output)
+    print(100 * "-")
 
 
 def main():
@@ -182,14 +229,16 @@ def main():
         ["Vegan Veg Korma", 21.50]
     ]
 
+    customer_details = []
+
     customer_pizzas = []
 
-    test_order = [
-       [4, 'Bacon and Aioli', 18.5, 74.0],
-       [3, 'Taco Fiesta', 18.5, 55.5],
-       [5, 'Fried Buffalo Chicken', 21.5, 107.5]
-     ]
-    customer_pizzas = test_order
+    # test_order = [
+    #    [4, 'Bacon and Aioli', 18.5, 74.0],
+    #    [3, 'Taco Fiesta', 18.5, 55.5],
+    #    [5, 'Fried Buffalo Chicken', 21.5, 107.5]
+    #  ]
+    # customer_pizzas = test_order
 
     sub_menu = [
         ("C", "Change Order Quantity"),
@@ -209,11 +258,16 @@ def main():
     print("PIZZAROO")
     print(100 * ("-"))
 
+    start_new_order = True
     run = True
     while run is True:
+        if start_new_order == True:
+            customer_information(customer_details)
+            print_customer_information(customer_details)
+            start_new_order = False
         for i in range(0, len(my_menu)):
             print("{:3} : {}".format(my_menu[i][0], my_menu[i][1]))
-        option = get_string("Please choose an option: --> ")
+        option = validate_string("Please choose an option: --> ", 1, 1)
         if option == "V":
             print(100*"-")
             print_pizza_menu(pizza_menu)
@@ -248,7 +302,7 @@ def main():
             print(100*"-")
             review_customer_order(customer_pizzas)
             print(100*"-")
-            cancel_order(customer_pizzas)
+            start_new_order = cancel_order(customer_pizzas)
             print(100*"-")
         elif option == "Q":
             run = False
@@ -256,7 +310,7 @@ def main():
             print("Thank you for shopping with Pizzaroo!")
             print(100*"-")
         else:
-            print("This is not a valid option. Please try again :)")
+            print("Please enter a single letter listed above. Your answer is not appropriate.")
             print(100*"-")
 
 

@@ -64,14 +64,12 @@ def validate_string(m, min, max):
 
     while True:
 
-        user_input = input(m)
-
-        user_input = user_input.replace(" ", "")
+        user_input = input(m).upper()
 
         if len(user_input) < min:
-            print("Please enter a longer answer.")
+            print("Your answer is too short. Please ensure you have typed in an appropriate response.")
         elif len(user_input) > max:
-            print("Please enter a shorter answer.")
+            print("Your answer is too long. Please ensure you have typed in an appropriate response.")
         else:
             return user_input
 
