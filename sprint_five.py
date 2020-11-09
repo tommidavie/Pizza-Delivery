@@ -21,9 +21,11 @@ def print_pizza_menu(p):
 def scan_customer_list(c):
     for i in range(0, len(c)):
         if c == c[i][0]:
-            number_of_choice = validate_integer("Please enter the new quantity of pizzas you would like: ", 0, 5)
+            number_of_choice = validate_integer\
+                ("Please enter the new quantity of pizzas you would like: ", 0, 5)
             print("This value has been added to a pizza already in your list")
-            print("You have entered {} with {} pieces".format(c[1][0], number_of_choice))
+            print("You have entered {} with {} pieces"
+                  .format(c[1][0], number_of_choice))
             c[i][1] += number_of_choice
         return True
     return False
@@ -32,10 +34,15 @@ def scan_customer_list(c):
 def customer_order(p, r):
     print_pizza_menu(p)
     print(100*"-")
-    index_number = validate_index("Please chose the index number of the pizza you would like to order: ", 0, len(p))
+    index_number = validate_index\
+        ("Please chose the index number of the pizza you would like to order: "
+         , 0, len(p))
     i_no = index_number - 1
-    amount = validate_integer("How many {} pizzas would you like to order: ".format(p[i_no][0]), 0, 5)
-    update = "{} {} pizzas have now been added to your order".format(amount, p[i_no][0])
+    amount = validate_integer\
+        ("How many {} pizzas would you like to order: "
+         .format(p[i_no][0]), 0, 5)
+    update = "{} {} pizzas have now been added to your order"\
+        .format(amount, p[i_no][0])
     print(update)
     # cost of one pizza
     pizza_cost = p[i_no][1]
@@ -46,7 +53,8 @@ def customer_order(p, r):
 def review_customer_order(r):
     print("CURRENT ORDER STATUS")
     print(100*"-")
-    output = "{:5} {:<9}  {:<51}  {:<45}".format("", "Qty", "Flavour", "Cost")
+    output = "{:5} {:<9}  {:<51}  {:<45}"\
+        .format("", "Qty", "Flavour", "Cost")
     print(output)
     total_cost = 0
     total_quantity = 0
@@ -54,7 +62,8 @@ def review_customer_order(r):
         cost = r[i][0] * r[i][2]
         total_cost += r[i][0]*r[i][2]
         total_quantity += r[i][0]
-        output = "{:3} : {:<8} : {:<25} @ a price of ${:<10} : ${}0".format(i+1, r[i][0], r[i][1], r[i][2], cost)
+        output = "{:3} : {:<8} : {:<25} @ a price of ${:<10} : ${}0".\
+            format(i+1, r[i][0], r[i][1], r[i][2], cost)
         print(output)
     print(100*"-")
     total_1 = "{:>78} {:<10}".format("Total Pizzas:", total_quantity)
@@ -71,17 +80,20 @@ def sub_menu_function(s, c):
         print(output)
     option = get_string("Which option would you like to select: ")
     if option == "C":
-        index = validate_index("Which index number would you like to edit: ", 0, len(c))
-        new_quantity = validate_integer("Please enter the new total quantity of {} pizzas: ".format(c[index-1][1]), 0, 5)
+        index = validate_index\
+            ("Which index number would you like to edit?: ", 0, len(c))
+        new_quantity = validate_integer\
+            ("Please enter the new total quantity of {} pizzas: "
+                                        .format(c[index-1][1]), 0, 5)
         c[index-1][0] = new_quantity
     elif option == "R":
-        message1 = "Which index number would you like to edit: "
-        index = validate_integer(message1, 0, len(c))
-        message2 = "Are you sure you would like to remove this flavour from the list enter 'y' for yes and 'n' for no: "
-        choice = get_string(message2)
+        index = validate_index\
+            ("Which index number would you like to edit?: ", 0, len(c))
+        choice = get_string\
+            ("Are you sure you would like to remove this flavour from the list? \n"
+             "Enter 'y' for yes and 'n' for no: ")
         if choice == 'Y':
             c.pop(index-1)
-            review_customer_order(c)
             return None
         if choice == 'N':
             return None

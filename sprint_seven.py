@@ -4,6 +4,8 @@
 from validations import validate_index
 from validations import validate_integer
 from validations import validate_string
+from validations import validate_p_and_d
+from validations import validate_u_and_d
 
 
 def print_pizza_menu(p):
@@ -67,7 +69,7 @@ def customer_order(p, r):
     r.append(temp_pizzas)
 
 
-def review_customer_order(r):
+def review_customer_order(r, d):
     """
     Print the current/updated customer order
     :param r: List (with pizza names which have been selected by the customer and their prices)
@@ -80,12 +82,14 @@ def review_customer_order(r):
     # Defines the total quantity and costs of the pizzas as $0 before the loop begins
     total_cost = 0
     total_quantity = 0
+    complete_cost = 0
     # A loop of fixed length
     for i in range(0, len(r)):
         # Multiplying the quantity and price of a singular pizza, resulting in it's total price
         cost = r[i][0] * r[i][2]
         # Adding a cost to the total cost, every time the loop in repeated/a new pizza(s) is added
         total_cost += r[i][0]*r[i][2]
+        complete_cost = total_cost + d
         # Adding a pizza quantity to the total quantity, every time the function is repeated/a new pizza(s) is added
         total_quantity += r[i][0]
         output = "{:3} : {:<8} : {:<25} @ a price of ${:<10} : ${}0".format(i+1, r[i][0], r[i][1], r[i][2], cost)
@@ -94,8 +98,10 @@ def review_customer_order(r):
     # Print concluding information
     total_1 = "{:>78} {:<10}".format("Total Pizzas:", total_quantity)
     print(total_1)
-    total_2 = "{:>76} ${:<10.2f}".format("Total Cost:", total_cost)
+    total_2 = "{:>76} ${:<10.2f}".format("Total Cost:", complete_cost)
     print(total_2)
+    total_3 = "{:>76} ${:<10.2f}".format("Delivery Charge:", d)
+    print(total_3)
 
 
 def sub_menu_function(s, c):
@@ -168,26 +174,27 @@ def customer_information(i):
     print(100*"-")
     run = True
     while run is True:
-        service = validate_string("Would you like to pick up your order or receive it through delivery? \n"
+        service = validate_p_and_d("Would you like to pick up your order or receive it through delivery? \n"
                                   "Press 'P' for pick up order and 'D' for delivery: ", 1, 1)
         if service in ["P", "p"]:
             name = validate_string("Please enter your full name: ", 2, 50)
-            phone = validate_string("Please enter your phone number: ", 5, 20)
-            card = validate_string("Please enter your card number: ", 5, 20)
+            phone = validate_string("Please enter your phone number: ", 5, 15)
+            card = validate_string("Please enter your card number: ", 16, 16)
             print(100*"-")
             temp_information_1 = [("Full Name", name), ("Phone Number", phone), ("Card Number", card)]
             i.extend(temp_information_1)
-            run = False
+            return 0
         elif service in ["D", "d"]:
+            delivery_charge = 3
             name = validate_string("Please enter your full name: ", 2, 50)
             address_line_1 = validate_string("Please enter the first line of your Address, i.e: '13 Hataitai Road' : ",
                                              3, 70)
             address_line_2 = validate_string("Please enter the second line of your Address, (OPTIONAL) \n"
                                              "e.g: 'Apt 2A, Level 3': ", 0, 70)
-            phone = validate_string("Please enter your phone number: ", 1, 1)
-            card = validate_string("Please enter your card number: ", 1, 1)
-            delivery_service = validate_string("Which deliver service would you like to use? \n"
-                                               "Press 'D' for Deliver Easy or 'U' for Uber Eats: ", 1, 1)
+            phone = validate_string("Please enter your phone number: ", 5, 15)
+            card = validate_string("Please enter your card number: ", 16, 16)
+            delivery_service = validate_u_and_d("Which delivery service would you like to use? \n"
+                                                "Press 'D' for Deliver Easy or 'U' for Uber Eats: ", 1, 1)
             if delivery_service in ["U", "u"]:
                 delivery_service = "UBER EATS"
             elif delivery_service in ["D", "d"]:
@@ -199,7 +206,7 @@ def customer_information(i):
             temp_information_2 = [("Full Name", name), ("Address Line One", address_line_1), ("Address Line Two", address_line_2),
                                   ("Phone Number", phone), ("Card Number", card), ("Delivery Service", delivery_service)]
             i.extend(temp_information_2)
-            run = False
+            return delivery_charge
 
 
 def print_customer_information(c):
@@ -233,6 +240,8 @@ def main():
 
     customer_pizzas = []
 
+    delivery_charge = 0
+
     # test_order = [
     #    [4, 'Bacon and Aioli', 18.5, 74.0],
     #    [3, 'Taco Fiesta', 18.5, 55.5],
@@ -262,7 +271,7 @@ def main():
     run = True
     while run is True:
         if start_new_order == True:
-            customer_information(customer_details)
+            delivery_charge = customer_information(customer_details)
             print_customer_information(customer_details)
             start_new_order = False
         for i in range(0, len(my_menu)):
@@ -284,7 +293,7 @@ def main():
                 print(100 * "-")
             else:
                 print(100*"-")
-                review_customer_order(customer_pizzas)
+                review_customer_order(customer_pizzas, delivery_charge)
                 print(100*"-")
         elif option == "U":
             if len(customer_pizzas) == 0:
@@ -294,13 +303,13 @@ def main():
                 print(100 * "-")
             else:
                 print(100 * "-")
-                review_customer_order(customer_pizzas)
+                review_customer_order(customer_pizzas, delivery_charge)
                 print(100*"-")
                 sub_menu_function(sub_menu, customer_pizzas)
                 print(100 * "-")
         elif option == "C":
             print(100*"-")
-            review_customer_order(customer_pizzas)
+            review_customer_order(customer_pizzas, delivery_charge)
             print(100*"-")
             start_new_order = cancel_order(customer_pizzas)
             print(100*"-")

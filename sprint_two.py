@@ -1,9 +1,11 @@
 from validations import validate_index
 from validations import validate_integer
 
+
 def get_string(m):
     my_string = input(m).upper()
     return my_string
+
 
 def print_pizza_menu(p):
     print("PIZZA MENU:")
@@ -50,9 +52,9 @@ def main():
 
     customer_pizzas = []
 
-    my_menu = [("P", "Pizza Menu"),
-               ("O", "Order"),
-               ("R", "Review Pizza Order"),
+    my_menu = [("R", "Pizza Menu"),
+               ("O", "Order a Pizza"),
+               ("R", "Review my order"),
                ("Q", "Quit")
                ]
 
@@ -80,6 +82,7 @@ def main():
         elif option == "Q":
             run = False
             print(100*"-")
+            print("The program has now ended.")
             print("Thank you for shopping with Pizzaroo!")
             print(100*"-")
         else:

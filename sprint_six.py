@@ -159,7 +159,8 @@ def cancel_order(c):
             print("Your order has not been canceled, you have been directed back to the main menu :)")
             run = False
         else:
-            print("Please enter either 'y' for 'yes' or 'n' for 'no'")
+            print("That is not an appropriate response. \n"
+                  "Please enter either 'y' for 'yes' or 'n' for 'no'")
             print(100 * "-")
             continue
 
@@ -184,12 +185,12 @@ def main():
 
     customer_pizzas = []
 
-    test_order = [
-       [4, 'Bacon and Aioli', 18.5, 74.0],
-       [3, 'Taco Fiesta', 18.5, 55.5],
-       [5, 'Fried Buffalo Chicken', 21.5, 107.5]
-     ]
-    customer_pizzas = test_order
+    # test_order = [
+    #    [4, 'Bacon and Aioli', 18.5, 74.0],
+    #    [3, 'Taco Fiesta', 18.5, 55.5],
+    #    [5, 'Fried Buffalo Chicken', 21.5, 107.5]
+    #  ]
+    # customer_pizzas = test_order
 
     sub_menu = [
         ("C", "Change Order Quantity"),
